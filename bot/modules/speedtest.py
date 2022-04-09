@@ -1,6 +1,6 @@
 from threading import Thread
 import time
-from charset_normalizer import logging
+#from charset_normalizer import logging
 from speedtest import Speedtest
 from bot.helper.ext_utils.bot_utils import get_readable_time
 from telegram.ext import CommandHandler
