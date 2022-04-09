@@ -1,5 +1,5 @@
 from telegram import Message
-import waybackpy, re, random
+#import waybackpy, re, random
 from telegram.ext import CommandHandler
 from bot import LOGGER, dispatcher
 from bot.helper.ext_utils.shortenurl import short_url
