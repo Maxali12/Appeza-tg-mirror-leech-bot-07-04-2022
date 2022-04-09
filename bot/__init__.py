@@ -96,6 +96,12 @@ get_client().application.set_preferences({"add_trackers": f"{trackerslist}"})
 
 DOWNLOAD_DIR = None
 BOT_TOKEN = None
+try:
+    IS_VPS = getConfig('IS_VPS')
+    if len(IS_VPS) == 0:
+        raise KeyError
+except KeyError:
+    IS_VPS = None
 
 download_dict_lock = Lock()
 status_reply_dict_lock = Lock()
