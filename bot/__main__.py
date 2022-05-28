@@ -12,7 +12,7 @@ from sys import executable
 from telegram import ParseMode, InlineKeyboardMarkup
 from telegram.ext import CommandHandler
 
-#from wserver import start_server_async
+from wserver import start_server_async
 from bot import HEROKU_API_KEY, IS_VPS, HEROKU_APP_NAME, bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, PORT, alive, web, OWNER_ID, AUTHORIZED_CHATS, LOGGER, Interval, rss_session, a2c
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
 from .helper.telegram_helper.bot_commands import BotCommands
@@ -46,27 +46,40 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
     else:
         sendMarkup('Not Authorized user, deploy your own mirror-leech bot', context.bot, update, reply_markup)
 
+#def restart(update, context):
+#    restart_message = sendMessage("Restarting...", context.bot, update)
+#    if Interval:
+#        Interval[0].cancel()
+#    alive.kill()
+#    procs = psprocess(web.pid)
+#    for proc in procs.children(recursive=True):
+#        proc.kill()
+#    procs.kill()
+#    clean_all()
+#    srun(["python3", "update.py"])
+#    nox.kill()
+#    a2cproc = psprocess(a2c.pid)
+#    for proc in a2cproc.children(recursive=True):
+#        proc.kill()
+#    a2cproc.kill()
+#    with open(".restartmsg", "w") as f:
+#       f.truncate(0)
+#        f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
+#    osexecl(executable, executable, "-m", "bot")
+
 def restart(update, context):
     restart_message = sendMessage("Restarting...", context.bot, update)
     if Interval:
         Interval[0].cancel()
     alive.kill()
-    procs = psprocess(web.pid)
-    for proc in procs.children(recursive=True):
-        proc.kill()
-    procs.kill()
     clean_all()
+    srun(["pkill", "-f", "aria2c"])
     srun(["python3", "update.py"])
-    nox.kill()
-    a2cproc = psprocess(a2c.pid)
-    for proc in a2cproc.children(recursive=True):
-        proc.kill()
-    a2cproc.kill()
     with open(".restartmsg", "w") as f:
         f.truncate(0)
         f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
     osexecl(executable, executable, "-m", "bot")
-
+    
 
 def ping(update, context):
     start_time = int(round(time() * 1000))
