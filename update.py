@@ -37,12 +37,12 @@ try:
     if len(UPSTREAM_REPO) == 0:
        raise TypeError
 except TypeError:
-    UPSTREAM_REPO = None
+    UPSTREAM_REPO = 'https://github.com/tmadminz/Appeza-tg-mirror-leech-bot-07-04-2022'
 try:
     if len(UPSTREAM_BRANCH) == 0:
        raise TypeError
 except TypeError:
-    UPSTREAM_BRANCH = 'master'
+    UPSTREAM_BRANCH = 'tm-mir'
 
 if UPSTREAM_REPO is not None:
     if ospath.exists('.git'):
