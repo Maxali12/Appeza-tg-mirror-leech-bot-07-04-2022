@@ -32,12 +32,20 @@ except TypeError:
 
 load_dotenv('config.env', override=True)
 
-UPSTREAM_REPO = os.environ.get('UPSTREAM_REPO', None)
+UPSTREAM_REPO = os.environ.get('UPSTREAM_REPO', None))
+UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH')
+
 try:
     if len(UPSTREAM_REPO) == 0:
        raise TypeError
 except TypeError:
     UPSTREAM_REPO = "https://github.com/tmadminz/Appeza-tg-mirror-leech-bot-07-04-2022"
+    
+try:
+    if len(UPSTREAM_BRANCH) == 0:
+       raise TypeError
+except TypeError:
+    UPSTREAM_BRANCH = 'tm-mir'
 
 if os.path.exists('.git'):
     subprocess.run(["rm", "-rf", ".git"])
@@ -49,5 +57,5 @@ subprocess.run([f"git init -q \
                   && git commit -sm update -q \
                   && git remote add origin {UPSTREAM_REPO} \
                   && git fetch origin -q \
-                  && git reset --hard origin/master -q"], shell=True)
+                  && git reset --hard origin/{UPSTREAM_BRANCH} -q"], shell=True)
 
