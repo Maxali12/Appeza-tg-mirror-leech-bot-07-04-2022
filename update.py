@@ -32,7 +32,7 @@ except TypeError:
 
 load_dotenv('config.env', override=True)
 
-UPSTREAM_REPO = os.environ.get('UPSTREAM_REPO', None))
+UPSTREAM_REPO = os.environ.get('UPSTREAM_REPO', None)
 UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH')
 
 try:
